@@ -6,98 +6,126 @@
 
 <h1>Bowling Score Card for @myData.PlayerName</h1>
 
-<p role="status">Total Score: @currentCount</p>
+<p role="status">Total Score: @totalScore</p>
 
 <p>You rolled a @lastRoll</p>
 
-<button class="btn btn-primary" @onclick="RollValue">Roll It!</button>
+<button class="btn btn-primary" @onclick="Roll">Roll It!</button>
 
 <button class="btn btn-secondary" @onclick="ResetGame">New Game!</button>
 
-<table class="table table-bordered text-center">
-    <thead>
-    <tr>
-        @for (int i = 0; i < 10; i++)
-        {
-            <th>Frame @(@i + 1)</th>
-        }
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        @for (int i = 0; i < 10; i++)
-        {
-            <td>@rolls[0,i]</td>
-        }
-    </tr>
-    <tr>
-        @for (int i = 0; i < 10; i++)
-        {
-            <td>@rolls[1,i]</td>
-        }
-    </tr>
-    <tr>
-        @for (int i = 0; i < 10; i++)
-        {
-            <td>@frameTotals[i]</td>
-        }
-    </tr>
-    </tbody>
+@if (showStrikeAnimation)
+{
+    <div class="strike-ball" role="img" aria-label="Bowling ball rolling"></div>
+}
+
+<table class="table table-bordered text-center"> 
+<thead>
+<tr> <!-- Roll 1 -->
+    @for (int i = 0; i < 10; i++)
+    {
+        <td>@(rolls[0,i] == 10 ? "X" : rolls[0,i]?.ToString() ?? "-")</td>
+
+    }
+</tr>
+<tr> <!-- Roll 2 -->
+    @for (int i = 0; i < 10; i++)
+    {
+        <td>@(rolls[0,i] == 10 ? "X" : rolls[1,i]?.ToString() ?? "-")</td>
+
+    }
+</tr>
+<tr> <!-- Frame Total -->
+    @for (int i = 0; i < 10; i++)
+    {
+        <td style="color:@(frameTotals[i] == 10 ? "blue" : "black")">
+            @frameTotals[i]
+        </td>
+    }
+</tr>
+</thead>
 </table>
 
+<p>Total Score: @totalScore</p>
+<button class="btn btn-primary" @onclick="Roll">Roll It!</button>
 
 
 @code {
-    public int[,] rolls = new int[2,10];   
+    private int?[,] rolls = new int?[2, 10];
     public int[] frameTotals = new int[10];
+    private int totalScore = 0;
     public int currentFrame = 0;
     public int currentRoll = 0;
-    public int currentCount = 0;
+    private int lastRoll = 0; 
+    private bool showStrikeAnimation = false;
     
     private Random rnd = new Random();
-    
-    private int lastRoll = 0; 
 
-    private void RollValue()
+    private async Task Roll()
     {
-        int pinsLeft = 10 - rolls[0,currentFrame]; 
-        lastRoll = rnd.Next(0, 11);
-        
+        int pinsLeft = 10;
+
+        int firstRoll = rolls[0,currentFrame] ?? 0;
+        if (currentRoll == 1)
+        {
+            pinsLeft -= firstRoll;
+        }
+
+        // Generate and persist last roll
+        lastRoll = rnd.Next(0, pinsLeft + 1);
         rolls[currentRoll, currentFrame] = lastRoll;
 
-        // Update frame total
-        frameTotals[currentFrame] = rolls[0, currentFrame] + rolls[1, currentFrame];
-
-        // Update total score
-        currentCount += lastRoll;
-        
-        if (currentRoll == 0)
+        // Strike handling
+        if (currentRoll == 0 && lastRoll == 10)
         {
-            lastRoll = rnd.Next(0, pinsLeft + 1);
-            rolls[currentRoll, currentFrame] = lastRoll;
-            currentRoll = 1;
+            rolls[1, currentFrame] = 0; 
+            frameTotals[currentFrame] = 10;
+            await TriggerStrikeAnimation();
+            currentFrame++; 
+            currentRoll = 0;
+        }
+        else if (currentRoll == 1)
+        {
+            frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0) + lastRoll;
+            currentFrame++;
+            currentRoll = 0;
         }
         else
         {
-            lastRoll = rnd.Next(0, 11 - rolls[0, currentFrame]);
-            rolls[currentRoll, currentFrame] = lastRoll;
-            
-            currentRoll = 0;
-            if (currentFrame < 9) currentFrame++;
+            currentRoll = 1;
+        }
+
+        // Update total score
+        totalScore = 0;
+        for (int i = 0; i < 10; i++)
+            totalScore += frameTotals[i];
+    }
+
+    private async Task TriggerStrikeAnimation()
+    {
+        // If already animating, restart the timer
+        showStrikeAnimation = true;
+        StateHasChanged();
+        try
+        {
+            await Task.Delay(2200);
+        }
+        finally
+        {
+            showStrikeAnimation = false;
+            StateHasChanged();
         }
     }
+
     private void ResetGame()
     {
-        rolls = new int[2, 10];
+        rolls = new int?[2, 10];
         frameTotals = new int[10];
-
-        // Reset counters
         currentFrame = 0;
         currentRoll = 0;
-        currentCount = 0;
+        totalScore = 0;
         lastRoll = 0;
-        
+        showStrikeAnimation = false;
     }
 
-    
 }
