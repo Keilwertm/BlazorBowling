@@ -7,17 +7,17 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: #228B22; /* forest green links */
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #228B22; /* forest green */
+    border-color: #1e7a1e; /* darker forest green border */
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #2e8b57; /* green focus ring */
 }
 
 .content {
@@ -84,7 +84,7 @@ a, .btn-link {
     }
 
         .loading-progress circle:last-child {
-            stroke: #1b6ec2;
+            stroke: #228B22; /* forest green */
             stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
             transition: stroke-dasharray 0.05s ease-in-out;
         }
@@ -101,7 +101,7 @@ a, .btn-link {
     }
 
 code {
-    color: #c02d76;
+    color: #006400; /* dark green for code text */
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

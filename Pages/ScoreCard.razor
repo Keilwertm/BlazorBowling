@@ -10,7 +10,9 @@
 
 <p>You rolled a @lastRoll</p>
 
-<button class="btn btn-primary" @onclick="rollValue">Roll It!</button>
+<button class="btn btn-primary" @onclick="RollValue">Roll It!</button>
+
+<button class="btn btn-secondary" @onclick="ResetGame">New Game!</button>
 
 <table class="table table-bordered text-center">
     <thead>
@@ -50,30 +52,52 @@
     public int[] frameTotals = new int[10];
     public int currentFrame = 0;
     public int currentRoll = 0;
-    private int currentCount = 0;
+    public int currentCount = 0;
     
     private Random rnd = new Random();
     
     private int lastRoll = 0; 
 
-    private void rollValue()
+    private void RollValue()
     {
+        int pinsLeft = 10 - rolls[0,currentFrame]; 
         lastRoll = rnd.Next(0, 11);
         
         rolls[currentRoll, currentFrame] = lastRoll;
 
         // Update frame total
-        frameTotals[currentFrame] += lastRoll;
+        frameTotals[currentFrame] = rolls[0, currentFrame] + rolls[1, currentFrame];
 
         // Update total score
         currentCount += lastRoll;
         
         if (currentRoll == 0)
+        {
+            lastRoll = rnd.Next(0, pinsLeft + 1);
+            rolls[currentRoll, currentFrame] = lastRoll;
             currentRoll = 1;
+        }
         else
         {
+            lastRoll = rnd.Next(0, 11 - rolls[0, currentFrame]);
+            rolls[currentRoll, currentFrame] = lastRoll;
+            
             currentRoll = 0;
             if (currentFrame < 9) currentFrame++;
         }
     }
+    private void ResetGame()
+    {
+        rolls = new int[2, 10];
+        frameTotals = new int[10];
+
+        // Reset counters
+        currentFrame = 0;
+        currentRoll = 0;
+        currentCount = 0;
+        lastRoll = 0;
+        
+    }
+
+    
 }
