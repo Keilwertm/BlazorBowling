@@ -1,4 +1,4 @@
-﻿@page "/Previous-Games"
+﻿@page "/previous-games"
 @using BlazorBowling.Services
 @inject DataRazor myData
 
@@ -6,4 +6,29 @@
 
 <h1>Previous Scores</h1>
 
-<p>Player: @myData.PlayerName</p>
+@if (myData.SavedGames is null || myData.SavedGames.Count == 0)
+{
+    <p>No previous games to display yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date/Time</th>
+            <th>Player</th>
+            <th class="text-end">Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var g in myData.SavedGames.OrderByDescending(g => g.Timestamp))
+        {
+            <tr>
+                <td>@g.Timestamp.ToString("g")</td>
+                <td>@g.PlayerName</td>
+                <td class="text-end">@g.Score</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

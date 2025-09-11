@@ -2156,10 +2156,10 @@ C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\re
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\s2bofwv2gr-5zh8xqpo7x.gz
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\co4pn60q1s-5zh8xqpo7x.gz
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\8zr1f3ipjr-arfpg3a7cf.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.xfh6q04n0f.pdb
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.skx8yaj1r4.wasm
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.skx8yaj1r4.wasm.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.xfh6q04n0f.pdb.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-skx8yaj1r4.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-xfh6q04n0f.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-ganso1z5an.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.6yet71xhly.pdb
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.sc3u2d2j02.wasm
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.sc3u2d2j02.wasm.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.6yet71xhly.pdb.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-sc3u2d2j02.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-6yet71xhly.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-7ksnnqdpvv.gz

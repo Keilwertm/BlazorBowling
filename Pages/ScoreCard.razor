@@ -1,4 +1,4 @@
-﻿@page "/Score-Card"
+﻿@page "/score-card"
 @using BlazorBowling.Services
 @inject DataRazor myData
 
@@ -7,12 +7,11 @@
 <h1>Bowling Score Card for @myData.PlayerName</h1>
 
 <p role="status">Total Score: @totalScore</p>
-
 <p>You rolled a @lastRoll</p>
 
 <button class="btn btn-primary" @onclick="Roll">Roll It!</button>
-
 <button class="btn btn-secondary" @onclick="ResetGame">New Game!</button>
+<button class="btn btn-third" @onclick="SaveScore">Save Score</button>
 
 @if (showStrikeAnimation)
 {
@@ -20,53 +19,67 @@
 }
 
 <table class="table table-bordered text-center"> 
-<thead>
-<tr> <!-- Roll 1 -->
-    @for (int i = 0; i < 10; i++)
-    {
-        var r1 = rolls[0,i];
-        <td>@(r1 == 10 ? "X" : r1.HasValue ? r1.ToString() : "-")</td>
-    }
-</tr>
-<tr> <!-- Roll 2 -->
-    @for (int i = 0; i < 10; i++)
-    {
-        var r1 = rolls[0,i];
-        var r2 = rolls[1,i];
-        <td>@(r1 == 10 ? "" : r2.HasValue ? r2.ToString() : "-")</td>
-    }
-</tr>
-<tr> <!-- Frame Total -->
-    @for (int i = 0; i < 10; i++)
-    {
-        var ft = frameTotals[i];
-        <td style="color:@(ft == 10 ? "blue" : "black")">
-            @(ft > 0 ? ft.ToString() : "-")
-        </td>
-    }
-</tr>
-</thead>
+    <thead>
+    <tr> <!-- Frame numbers -->
+        @for (int i = 0; i < maxFrames; i++)
+        {
+            <th>Frame @(@i + 1)</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    <tr> <!-- Roll 1 -->
+        @for (int i = 0; i < maxFrames; i++)
+        {
+            var r1 = rolls[0,i];
+            <td>@(r1 == 10 ? "X" : r1.HasValue ? r1.ToString() : "-")</td>
+        }
+    </tr>
+    <tr> <!-- Roll 2 -->
+        @for (int i = 0; i < maxFrames; i++)
+        {
+            var r1 = rolls[0,i];
+            var r2 = rolls[1,i];
+            <td>@(r1 == 10 ? "" : r2.HasValue ? r2.ToString() : "-")</td>
+        }
+    </tr>
+    <tr> <!-- Frame Total -->
+        @for (int i = 0; i < maxFrames; i++)
+        {
+            var displayTotal = GetDisplayedFrameTotal(i);
+            <td style="color:@(displayTotal.HasValue && displayTotal.Value == 10 ? "blue" : "black")">
+                @(displayTotal.HasValue ? displayTotal.Value.ToString() : "-")
+            </td>
+        }
+    </tr>
+    </tbody>
 </table>
 
-<p>Total Score: @totalScore</p>
-<button class="btn btn-primary" @onclick="Roll">Roll It!</button>
-
-
 @code {
-    private int?[,] rolls = new int?[2, 10];
-    public int[] frameTotals = new int[10];
+    private int?[,] rolls = new int?[2, 12];
+    public int[] frameTotals = new int[12];
+    private int maxFrames = 10;
     private int totalScore = 0;
     public int currentFrame = 0;
-    public int currentRoll = 0;
-    private int lastRoll = 0; 
+    public int currentRoll = 10;
+    private int lastRoll = 10; 
     private bool showStrikeAnimation = false;
     
     private Random rnd = new Random();
 
+    private void SaveScore()
+    {
+        myData.SavedGames.Add(new SavedGame
+        {
+            PlayerName = string.IsNullOrWhiteSpace(myData.PlayerName) ? "Player" : myData.PlayerName,
+            Score = totalScore,
+            Timestamp = DateTime.Now
+        });
+    }
+
     private async Task Roll()
     {
-        if (currentFrame >= 10) return; // no rolls after frame 10
-        if (showStrikeAnimation) return; // ignore clicks while strike animation is running
+        if (currentFrame >= maxFrames) return; 
 
         int pinsLeft = 10;
         int firstRoll = rolls[0,currentFrame] ?? 0;
@@ -82,31 +95,108 @@
         {
             rolls[1, currentFrame] = null; // leave blank instead of 0
             frameTotals[currentFrame] = 10;
+
+            // Tenth-frame logic: add extra frames on strikes
+            if (currentFrame == 9 && maxFrames == 10)
+            {
+                maxFrames = 11; 
+            }
+            else if (currentFrame == 10 && maxFrames == 11)
+            {
+                maxFrames = 12; 
+            }
+
             currentFrame++;   // jump straight to next frame
-            currentRoll = 0;  // reset to first roll
+            currentRoll = 0;  
             await TriggerStrikeAnimation();
         }
-        // SECOND ROLL
+        // Second roll
         else if (currentRoll == 1)
         {
             frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0) + (rolls[1,currentFrame] ?? 0);
             currentFrame++;
             currentRoll = 0;
         }
-        // FIRST ROLL BUT NOT STRIKE
+        // First roll was not a strike
         else
         {
-            currentRoll = 1;
+            // If we're in the final bonus frame (12th visual slot), allow only one delivery
+            if (currentFrame == 11 && maxFrames == 12)
+            {
+                frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0);
+                currentFrame++;
+                currentRoll = 0;
+            }
+            else
+            {
+                currentRoll = 1;
+            }
         }
-
-        // Update total
         totalScore = frameTotals.Sum();
     }
 
+    private int? GetDisplayedFrameTotal(int i)
+    {
+        // Regular frames 1–9: show stored frame total when > 0
+        if (i < 9)
+        {
+            var ft = frameTotals[i];
+            return ft > 0 ? ft : (int?)null;
+        }
+
+        // Helper local function to compute the 10th frame's displayed total including bonuses
+        int? ComputeTenthWithBonuses()
+        {
+            var baseTotal = frameTotals[9]; // usually 10 when strike or sum of two rolls when not
+            if (baseTotal <= 0) return null;
+
+            if (maxFrames == 10)
+            {
+                return baseTotal;
+            }
+
+            int bonus1 = 0;
+            int bonus2 = 0;
+
+            var r11_1 = rolls[0,10];
+            var r11_2 = rolls[1,10];
+            var r12_1 = rolls[0,11];
+
+            if (r11_1.HasValue)
+            {
+                if (r11_1.Value == 10)
+                {
+                    // strike as first bonus; second bonus is the first roll of frame 12 (if any)
+                    bonus1 = 10;
+                    if (r12_1.HasValue) bonus2 = r12_1.Value;
+                }
+                else
+                {
+                    bonus1 = r11_1.Value;
+                    if (r11_2.HasValue) bonus2 = r11_2.Value;
+                }
+            }
+            var total = baseTotal + bonus1 + bonus2;
+            return total > 0 ? total : (int?)null;
+        }
+
+        // i == 9 (10th frame column): always show the computed 10th frame total
+        if (i == 9)
+        {
+            return ComputeTenthWithBonuses();
+        }
+
+        // Bonus frames (i > 9): only show the computed total in the last visible column
+        if (i > 9)
+        {
+            return i == (maxFrames - 1) ? ComputeTenthWithBonuses() : (int?)null;
+        }
+
+        return null;
+    }
 
     private async Task TriggerStrikeAnimation()
     {
-        // If already animating, restart the timer
         showStrikeAnimation = true;
         StateHasChanged();
         try
@@ -122,15 +212,13 @@
 
     private void ResetGame()
     {
-        rolls = new int?[2, 10];
-        frameTotals = new int[10];
+        rolls = new int?[2, 12];
+        frameTotals = new int[12];
+        maxFrames = 10;
         currentFrame = 0;
         currentRoll = 0;
         totalScore = 0;
         lastRoll = 0;
         showStrikeAnimation = false;
     }
-    
-    // bug fix: after getting a strike you have to click 2-3 times to advance 
 }
-
