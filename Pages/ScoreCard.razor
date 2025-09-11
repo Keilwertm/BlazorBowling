@@ -1,0 +1,79 @@
+﻿@page "/Score-Card"
+@using BlazorBowling.Services
+@inject DataRazor myData
+
+<PageTitle>Bowling Score Card</PageTitle>
+
+<h1>Bowling Score Card for @myData.PlayerName</h1>
+
+<p role="status">Total Score: @currentCount</p>
+
+<p>You rolled a @lastRoll</p>
+
+<button class="btn btn-primary" @onclick="rollValue">Roll It!</button>
+
+<table class="table table-bordered text-center">
+    <thead>
+    <tr>
+        @for (int i = 0; i < 10; i++)
+        {
+            <th>Frame @(@i + 1)</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        @for (int i = 0; i < 10; i++)
+        {
+            <td>@rolls[0,i]</td>
+        }
+    </tr>
+    <tr>
+        @for (int i = 0; i < 10; i++)
+        {
+            <td>@rolls[1,i]</td>
+        }
+    </tr>
+    <tr>
+        @for (int i = 0; i < 10; i++)
+        {
+            <td>@frameTotals[i]</td>
+        }
+    </tr>
+    </tbody>
+</table>
+
+
+
+@code {
+    public int[,] rolls = new int[2,10];   
+    public int[] frameTotals = new int[10];
+    public int currentFrame = 0;
+    public int currentRoll = 0;
+    private int currentCount = 0;
+    
+    private Random rnd = new Random();
+    
+    private int lastRoll = 0; 
+
+    private void rollValue()
+    {
+        lastRoll = rnd.Next(0, 11);
+        
+        rolls[currentRoll, currentFrame] = lastRoll;
+
+        // Update frame total
+        frameTotals[currentFrame] += lastRoll;
+
+        // Update total score
+        currentCount += lastRoll;
+        
+        if (currentRoll == 0)
+            currentRoll = 1;
+        else
+        {
+            currentRoll = 0;
+            if (currentFrame < 9) currentFrame++;
+        }
+    }
+}

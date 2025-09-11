@@ -1,0 +1,23 @@
+﻿@page "/"
+@using BlazorBowling.Services
+@inject DataRazor myData
+@inject NavigationManager Nav
+
+<PageTitle>Home</PageTitle>
+
+<h1>Welcome, @myData.PlayerName!</h1>
+
+<InputText @bind-Value="name" placeholder="Enter name..." />
+
+<button @onclick="SaveName" disabled="@string.IsNullOrWhiteSpace(name)">Start Game</button>
+
+@code {
+    private string name { get; set; } = "";
+    
+    private void SaveName()
+    {
+        myData.PlayerName = name;
+        Nav.NavigateTo("/score-card");  // moves to the scorecard page
+    }
+
+}
