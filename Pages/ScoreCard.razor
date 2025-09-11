@@ -24,22 +24,24 @@
 <tr> <!-- Roll 1 -->
     @for (int i = 0; i < 10; i++)
     {
-        <td>@(rolls[0,i] == 10 ? "X" : rolls[0,i]?.ToString() ?? "-")</td>
-
+        var r1 = rolls[0,i];
+        <td>@(r1 == 10 ? "X" : r1.HasValue ? r1.ToString() : "-")</td>
     }
 </tr>
 <tr> <!-- Roll 2 -->
     @for (int i = 0; i < 10; i++)
     {
-        <td>@(rolls[0,i] == 10 ? "X" : rolls[1,i]?.ToString() ?? "-")</td>
-
+        var r1 = rolls[0,i];
+        var r2 = rolls[1,i];
+        <td>@(r1 == 10 ? "" : r2.HasValue ? r2.ToString() : "-")</td>
     }
 </tr>
 <tr> <!-- Frame Total -->
     @for (int i = 0; i < 10; i++)
     {
-        <td style="color:@(frameTotals[i] == 10 ? "blue" : "black")">
-            @frameTotals[i]
+        var ft = frameTotals[i];
+        <td style="color:@(ft == 10 ? "blue" : "black")">
+            @(ft > 0 ? ft.ToString() : "-")
         </td>
     }
 </tr>
@@ -63,43 +65,44 @@
 
     private async Task Roll()
     {
+        if (currentFrame >= 10) return; // no rolls after frame 10
+        if (showStrikeAnimation) return; // ignore clicks while strike animation is running
+
         int pinsLeft = 10;
-
         int firstRoll = rolls[0,currentFrame] ?? 0;
-        if (currentRoll == 1)
-        {
-            pinsLeft -= firstRoll;
-        }
 
-        // Generate and persist last roll
+        if (currentRoll == 1)
+            pinsLeft -= firstRoll;
+
         lastRoll = rnd.Next(0, pinsLeft + 1);
         rolls[currentRoll, currentFrame] = lastRoll;
 
-        // Strike handling
+        // STRIKE
         if (currentRoll == 0 && lastRoll == 10)
         {
-            rolls[1, currentFrame] = 0; 
+            rolls[1, currentFrame] = null; // leave blank instead of 0
             frameTotals[currentFrame] = 10;
+            currentFrame++;   // jump straight to next frame
+            currentRoll = 0;  // reset to first roll
             await TriggerStrikeAnimation();
-            currentFrame++; 
-            currentRoll = 0;
         }
+        // SECOND ROLL
         else if (currentRoll == 1)
         {
-            frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0) + lastRoll;
+            frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0) + (rolls[1,currentFrame] ?? 0);
             currentFrame++;
             currentRoll = 0;
         }
+        // FIRST ROLL BUT NOT STRIKE
         else
         {
             currentRoll = 1;
         }
 
-        // Update total score
-        totalScore = 0;
-        for (int i = 0; i < 10; i++)
-            totalScore += frameTotals[i];
+        // Update total
+        totalScore = frameTotals.Sum();
     }
+
 
     private async Task TriggerStrikeAnimation()
     {
@@ -127,5 +130,7 @@
         lastRoll = 0;
         showStrikeAnimation = false;
     }
-
+    
+    // bug fix: after getting a strike you have to click 2-3 times to advance 
 }
+
