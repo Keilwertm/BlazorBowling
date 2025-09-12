@@ -3239,10 +3239,10 @@ C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\refint\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.pdb
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\ref\BlazorBowling.dll
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.st057ypyz2.pdb
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.joh8tkq5l3.wasm
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.joh8tkq5l3.wasm.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.st057ypyz2.pdb.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-joh8tkq5l3.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-st057ypyz2.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-4geshrvdgu.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.llpcpeotmx.pdb
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.3jkr8usyld.wasm
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.3jkr8usyld.wasm.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.llpcpeotmx.pdb.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-3jkr8usyld.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-llpcpeotmx.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-rvsjpt7sa1.gz
