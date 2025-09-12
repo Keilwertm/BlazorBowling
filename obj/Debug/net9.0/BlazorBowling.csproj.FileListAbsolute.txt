@@ -3239,10 +3239,10 @@ C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\refint\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.pdb
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\ref\BlazorBowling.dll
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.llpcpeotmx.pdb
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.3jkr8usyld.wasm
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.3jkr8usyld.wasm.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.llpcpeotmx.pdb.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-3jkr8usyld.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-llpcpeotmx.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-rvsjpt7sa1.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.8jxrr7pe0s.pdb
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.ebb2qiomlt.wasm
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.ebb2qiomlt.wasm.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.8jxrr7pe0s.pdb.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-ebb2qiomlt.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-8jxrr7pe0s.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-0ccniqmpfx.gz
