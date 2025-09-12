@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\keilw\\RiderProjects\\BlazorBowling\\BlazorBowling.csproj": {}
+    "C:\\Users\\mkeilwert\\RiderProjects\\BlazorBowling\\BlazorBowling\\BlazorBowling.csproj": {}
   },
   "projects": {
-    "C:\\Users\\keilw\\RiderProjects\\BlazorBowling\\BlazorBowling.csproj": {
+    "C:\\Users\\mkeilwert\\RiderProjects\\BlazorBowling\\BlazorBowling\\BlazorBowling.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\keilw\\RiderProjects\\BlazorBowling\\BlazorBowling.csproj",
+        "projectUniqueName": "C:\\Users\\mkeilwert\\RiderProjects\\BlazorBowling\\BlazorBowling\\BlazorBowling.csproj",
         "projectName": "BlazorBowling",
-        "projectPath": "C:\\Users\\keilw\\RiderProjects\\BlazorBowling\\BlazorBowling.csproj",
-        "packagesPath": "C:\\Users\\keilw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\keilw\\RiderProjects\\BlazorBowling\\obj\\",
+        "projectPath": "C:\\Users\\mkeilwert\\RiderProjects\\BlazorBowling\\BlazorBowling\\BlazorBowling.csproj",
+        "packagesPath": "C:\\Users\\mkeilwert\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mkeilwert\\RiderProjects\\BlazorBowling\\BlazorBowling\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\keilw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mkeilwert\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +26,10 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "\\\\dev.novarad.net\\builds\\debug\\packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tfs.novarad.net/tfs/DefaultCollection/Novarad/_packaging/8.10_PackageFeed/nuget/v3/index.json": {},
+          "https://tfs.novarad.net/tfs/DefaultCollection/Novarad/_packaging/8.9_PackageFeed/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -38,9 +45,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -58,13 +65,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )",
+              "version": "[9.0.4, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0, )",
+              "version": "[9.0.4, )",
               "autoReferenced": true
             }
           },
@@ -82,7 +89,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[9.0.0, 9.0.0]"
+              "version": "[9.0.4, 9.0.4]"
             }
           ],
           "frameworkReferences": {
@@ -90,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\keilw\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

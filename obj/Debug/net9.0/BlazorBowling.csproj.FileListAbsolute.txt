@@ -2156,13 +2156,6 @@ C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\re
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\s2bofwv2gr-5zh8xqpo7x.gz
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\co4pn60q1s-5zh8xqpo7x.gz
 C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\8zr1f3ipjr-arfpg3a7cf.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.6yet71xhly.pdb
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.sc3u2d2j02.wasm
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.sc3u2d2j02.wasm.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.6yet71xhly.pdb.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-sc3u2d2j02.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-6yet71xhly.gz
-C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-7ksnnqdpvv.gz
 C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\dotnet.js
 C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\dotnet.js.map
@@ -3246,3 +3239,10 @@ C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\refint\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.pdb
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\ref\BlazorBowling.dll
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.7p3b2i1g78.pdb
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.plg31qwpb9.wasm
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.plg31qwpb9.wasm.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.7p3b2i1g78.pdb.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-plg31qwpb9.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-7p3b2i1g78.gz
+C:\Users\mkeilwert\RiderProjects\BlazorBowling\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-u044ljg95y.gz

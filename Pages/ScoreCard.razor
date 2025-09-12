@@ -9,9 +9,22 @@
 <p role="status">Total Score: @totalScore</p>
 <p>You rolled a @lastRoll</p>
 
-<button class="btn btn-primary" @onclick="Roll">Roll It!</button>
+<button @onclick="ToggleManualInput">
+    @(manualInputMode ? "Exit Manual Mode" : "Enter Manual Mode")
+</button>
+
+@if (manualInputMode)
+{
+    <input type="number" min="0" max="10" @bind="manualPins" />
+    <button @onclick="() => Roll(manualPins)">Submit Roll</button>
+}
+else
+{
+    <button @onclick="() => Roll()">Roll it!</button>
+}
+
 <button class="btn btn-secondary" @onclick="ResetGame">New Game!</button>
-<button class="btn btn-third" @onclick="SaveScore">Save Score</button>
+<button class="btn btn-secondary" @onclick="SaveScore">Save Score</button>
 
 @if (showStrikeAnimation)
 {
@@ -55,6 +68,8 @@
     </tbody>
 </table>
 
+
+
 @code {
     private int?[,] rolls = new int?[2, 12];
     public int[] frameTotals = new int[12];
@@ -64,8 +79,18 @@
     public int currentRoll = 10;
     private int lastRoll = 10; 
     private bool showStrikeAnimation = false;
+    private bool manualInputMode = false;
+    private int manualPins = 0;
+
     
     private Random rnd = new Random();
+    
+    private void ToggleManualInput()
+    {
+        manualInputMode = !manualInputMode;
+        manualPins = 0;
+    }
+
 
     private void SaveScore()
     {
@@ -77,7 +102,7 @@
         });
     }
 
-    private async Task Roll()
+    private async Task Roll(int? forcedPins = null)
     {
         if (currentFrame >= maxFrames) return; 
 
@@ -87,40 +112,34 @@
         if (currentRoll == 1)
             pinsLeft -= firstRoll;
 
-        lastRoll = rnd.Next(0, pinsLeft + 1);
+        // use manual/auto pins if provided, otherwise random
+        lastRoll = forcedPins ?? rnd.Next(0, pinsLeft + 1);
+
         rolls[currentRoll, currentFrame] = lastRoll;
 
         // STRIKE
         if (currentRoll == 0 && lastRoll == 10)
         {
-            rolls[1, currentFrame] = null; // leave blank instead of 0
+            rolls[1, currentFrame] = null; 
             frameTotals[currentFrame] = 10;
 
-            // Tenth-frame logic: add extra frames on strikes
             if (currentFrame == 9 && maxFrames == 10)
-            {
-                maxFrames = 11; 
-            }
+                maxFrames = 11;
             else if (currentFrame == 10 && maxFrames == 11)
-            {
-                maxFrames = 12; 
-            }
+                maxFrames = 12;
 
-            currentFrame++;   // jump straight to next frame
+            currentFrame++;
             currentRoll = 0;  
             await TriggerStrikeAnimation();
         }
-        // Second roll
         else if (currentRoll == 1)
         {
             frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0) + (rolls[1,currentFrame] ?? 0);
             currentFrame++;
             currentRoll = 0;
         }
-        // First roll was not a strike
         else
         {
-            // If we're in the final bonus frame (12th visual slot), allow only one delivery
             if (currentFrame == 11 && maxFrames == 12)
             {
                 frameTotals[currentFrame] = (rolls[0,currentFrame] ?? 0);
@@ -132,8 +151,10 @@
                 currentRoll = 1;
             }
         }
+
         totalScore = frameTotals.Sum();
     }
+
 
     private int? GetDisplayedFrameTotal(int i)
     {
@@ -220,6 +241,7 @@
         totalScore = 0;
         lastRoll = 0;
         showStrikeAnimation = false;
+        
+        // Bugfix: When first visiting the scorecard, or return to it, you have to click new-game to get it scoring.
     }
-    // Bugfix: When returning to the tab, you cannot roll until you click 'new game'
 }
