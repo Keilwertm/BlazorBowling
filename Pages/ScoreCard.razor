@@ -200,8 +200,7 @@ else
             var total = baseTotal + bonus1 + bonus2;
             return total > 0 ? total : (int?)null;
         }
-
-        // i == 9 (10th frame column): always show the computed 10th frame total
+        
         if (i == 9)
         {
             return ComputeTenthWithBonuses();
