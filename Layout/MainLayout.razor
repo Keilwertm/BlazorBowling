@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@using BlazorBowling
+@inject DebugStatus DebugStatus
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -8,6 +10,13 @@
         <div class="top-row px-4">
             <a href="https://github.com/Keilwertm/BlazorBowling" target="_blank">GitHub</a>
         </div>
+
+        @if (DebugStatus?.ChecksPassed == true)
+        {
+            <div class="debug-banner">
+                ✅ @DebugStatus.Message
+            </div>
+        }
 
         <article class="content px-4">
             @Body

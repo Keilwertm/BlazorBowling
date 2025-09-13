@@ -15,20 +15,20 @@
 
 @if (manualInputMode)
 {
-    <input type="number" min="0" max="10" @bind="manualPins" />
-    <button @onclick="() => Roll(manualPins)">Submit Roll</button>
+    <InputNumber @bind-Value="manualPins"
+                 min="0" max="10" step="1"
+                 inputmode="numeric" pattern="\d*"
+                 oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                 class="form-control form-control-sm w-auto d-inline-block me-2" />
+    <button class="btn btn-primary btn-sm d-inline-block"
+            @onclick="() => Roll(manualPins)"
+            disabled="@(manualPins < 0 || manualPins > 10)">
+        Submit Roll
+    </button>
 }
 else
 {
     <button @onclick="() => Roll()">Roll it!</button>
-}
-
-<button class="btn btn-secondary" @onclick="ResetGame">New Game!</button>
-<button class="btn btn-secondary" @onclick="SaveScore">Save Score</button>
-
-@if (showStrikeAnimation)
-{
-    <div class="strike-ball" role="img" aria-label="Bowling ball rolling"></div>
 }
 
 <table class="table table-bordered text-center"> 
@@ -53,14 +53,26 @@ else
         {
             var r1 = rolls[0,i];
             var r2 = rolls[1,i];
-            <td>@(r1 == 10 ? "" : r2.HasValue ? r2.ToString() : "-")</td>
+            // spare display: show "/" when first + second roll equals 10 (and not a strike on first ball)
+            string cell = "-";
+            if (r1 == 10)
+            {
+                cell = ""; // strike in this frame; second box is empty for frames 1-9
+            }
+            else if (r2.HasValue)
+            {
+                var sum = (r1 ?? 0) + (r2 ?? 0);
+                cell = sum == 10 ? "/" : r2.GetValueOrDefault().ToString();
+            }
+            <td>@cell</td>
         }
     </tr>
     <tr> <!-- Frame Total -->
         @for (int i = 0; i < maxFrames; i++)
         {
             var displayTotal = GetDisplayedFrameTotal(i);
-            <td style="color:@(displayTotal.HasValue && displayTotal.Value == 10 ? "blue" : "black")">
+            var highlight = displayTotal.HasValue && displayTotal.Value == 10;
+            <td class="frame-total @(highlight ? "highlight" : null)">
                 @(displayTotal.HasValue ? displayTotal.Value.ToString() : "-")
             </td>
         }
@@ -68,7 +80,10 @@ else
     </tbody>
 </table>
 
-
+<div class="d-flex gap-2 mt-3">
+    <button class="btn btn-secondary btn-sm" @onclick="ResetGame">New Game</button>
+    <button class="btn btn-outline-secondary btn-sm" @onclick="SaveScore">Save Score</button>
+</div>
 
 @code {
     private int?[,] rolls = new int?[2, 12];
@@ -78,10 +93,8 @@ else
     public int currentFrame = 0;
     public int currentRoll = 0;
     private int lastRoll = 0; 
-    private bool showStrikeAnimation = false;
     private bool manualInputMode = false;
     private int manualPins = 0;
-
     
     private Random rnd = new Random();
     
@@ -102,7 +115,7 @@ else
         });
     }
 
-    private async Task Roll(int? forcedPins = null)
+    private void Roll(int? forcedPins = null)
     {
         if (currentFrame >= maxFrames) return; 
 
@@ -113,7 +126,9 @@ else
             pinsLeft -= firstRoll;
 
         // use manual/auto pins if provided, otherwise random
-        lastRoll = forcedPins ?? rnd.Next(0, pinsLeft + 1);
+        lastRoll = forcedPins.HasValue
+            ? Math.Clamp(forcedPins.Value, 0, pinsLeft)
+            : rnd.Next(0, pinsLeft + 1);
 
         rolls[currentRoll, currentFrame] = lastRoll;
 
@@ -123,6 +138,7 @@ else
             rolls[1, currentFrame] = null; 
             frameTotals[currentFrame] = 10;
 
+
             if (currentFrame == 9 && maxFrames == 10)
                 maxFrames = 11;
             else if (currentFrame == 10 && maxFrames == 11)
@@ -130,7 +146,6 @@ else
 
             currentFrame++;
             currentRoll = 0;  
-            await TriggerStrikeAnimation();
         }
         else if (currentRoll == 1)
         {
@@ -152,84 +167,38 @@ else
             }
         }
 
-        totalScore = frameTotals.Sum();
+        // recompute full scoring with bonuses after each delivery
+        RecalculateScore();
     }
 
+    // ... existing code ...
 
     private int? GetDisplayedFrameTotal(int i)
     {
-        // Regular frames 1–9: show stored frame total when > 0
+        // For frames 1–9: show computed frame score when > 0
         if (i < 9)
         {
             var ft = frameTotals[i];
             return ft > 0 ? ft : (int?)null;
         }
 
-        // Helper local function to compute the 10th frame's displayed total including bonuses
-        int? ComputeTenthWithBonuses()
-        {
-            var baseTotal = frameTotals[9]; // usually 10 when strike or sum of two rolls when not
-            if (baseTotal <= 0) return null;
-
-            if (maxFrames == 10)
-            {
-                return baseTotal;
-            }
-
-            int bonus1 = 0;
-            int bonus2 = 0;
-
-            var r11_1 = rolls[0,10];
-            var r11_2 = rolls[1,10];
-            var r12_1 = rolls[0,11];
-
-            if (r11_1.HasValue)
-            {
-                if (r11_1.Value == 10)
-                {
-                    // strike as first bonus; second bonus is the first roll of frame 12 (if any)
-                    bonus1 = 10;
-                    if (r12_1.HasValue) bonus2 = r12_1.Value;
-                }
-                else
-                {
-                    bonus1 = r11_1.Value;
-                    if (r11_2.HasValue) bonus2 = r11_2.Value;
-                }
-            }
-            var total = baseTotal + bonus1 + bonus2;
-            return total > 0 ? total : (int?)null;
-        }
-        
+        // For the 10th (index 9): show computed total of the 10th frame including bonuses (already in frameTotals[9])
         if (i == 9)
         {
-            return ComputeTenthWithBonuses();
+            var ft10 = frameTotals[9];
+            return ft10 > 0 ? ft10 : (int?)null;
         }
 
-        // Bonus frames (i > 9): only show the computed total in the last visible column
+        // For any bonus columns (i > 9), show the 10th-frame computed total in the last visible column only
         if (i > 9)
         {
-            return i == (maxFrames - 1) ? ComputeTenthWithBonuses() : (int?)null;
+            var ft10 = frameTotals[9];
+            return (i == (maxFrames - 1) && ft10 > 0) ? ft10 : (int?)null;
         }
 
         return null;
     }
-
-    private async Task TriggerStrikeAnimation()
-    {
-        showStrikeAnimation = true;
-        StateHasChanged();
-        try
-        {
-            await Task.Delay(2200);
-        }
-        finally
-        {
-            showStrikeAnimation = false;
-            StateHasChanged();
-        }
-    }
-
+    
     private void ResetGame()
     {
         rolls = new int?[2, 12];
@@ -239,8 +208,66 @@ else
         currentRoll = 0;
         totalScore = 0;
         lastRoll = 0;
-        showStrikeAnimation = false;
-        
-        // Bugfix: When first visiting the scorecard, or return to it, you have to click new-game to get it scoring.
     }
+
+    // Recompute per-frame scores (with bonuses) and total
+    private void RecalculateScore()
+    {
+        var seq = GetAllRollsSequence();
+        Array.Clear(frameTotals, 0, frameTotals.Length);
+
+        int rollIdx = 0;
+        for (int frame = 0; frame < 10; frame++)
+        {
+            if (rollIdx >= seq.Count)
+            {
+                frameTotals[frame] = 0;
+                continue;
+            }
+
+            // strike
+            if (seq[rollIdx] == 10)
+            {
+                int bonus1 = SafeSeq(seq, rollIdx + 1);
+                int bonus2 = SafeSeq(seq, rollIdx + 2);
+                frameTotals[frame] = 10 + bonus1 + bonus2;
+                rollIdx += 1;
+                continue;
+            }
+
+            // normal or spare
+            int first = seq[rollIdx];
+            int second = SafeSeq(seq, rollIdx + 1);
+            int framePins = first + second;
+
+            if (framePins == 10)
+            {
+                int bonus = SafeSeq(seq, rollIdx + 2);
+                frameTotals[frame] = 10 + bonus;
+            }
+            else
+            {
+                frameTotals[frame] = framePins;
+            }
+
+            rollIdx += 2;
+        }
+
+        totalScore = frameTotals.Take(10).Sum();
+    }
+
+    private List<int> GetAllRollsSequence()
+    {
+        var list = new List<int>(21);
+        for (int f = 0; f < 12; f++)
+        {
+            var r1 = rolls[0, f];
+            var r2 = rolls[1, f];
+            if (r1.HasValue) list.Add(r1.Value);
+            if (r2.HasValue) list.Add(r2.Value);
+        }
+        return list;
+    }
+
+    private static int SafeSeq(List<int> seq, int idx) => idx < seq.Count ? seq[idx] : 0;
 }

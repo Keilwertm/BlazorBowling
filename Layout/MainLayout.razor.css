@@ -1,48 +1,182 @@
 .page {
+
+    article.content {
+        background-color: #0f1a0f;
+        color: #e6ffe6;
+    }
+
+    /* Red bowling ball animation */
+    article.content ::deep .strike-ball {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        /* Use explicit color stops for broad compatibility */
+        background:
+                radial-gradient(circle at 35% 35%, #ff8a8a 0px, #ff8a8a 6px, transparent 7px),
+                radial-gradient(circle at 60% 25%, #ff8a8a 0px, #ff8a8a 4px, transparent 5px),
+                radial-gradient(circle at 45% 55%, #ff8a8a 0px, #ff8a8a 3px, transparent 4px),
+                radial-gradient(circle at 50% 50%, #ff2b2b 0%, #cc2020 70%, #aa1717 100%);
+        box-shadow: 0 4px 10px rgba(0,0,0,.5);
+        margin: 10px 0 0 10px;
+        animation: strike-roll 2.2s ease-out forwards;
+        will-change: transform, opacity;
+    }
+
+    @keyframes strike-roll {
+        0% {
+            transform: translateX(0) rotate(0deg);
+            opacity: 0.0;
+        }
+        8% { opacity: 1; }
+        80% {
+            transform: translateX(420px) rotate(540deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(460px) rotate(720deg);
+            opacity: 0.9;
+        }
+    }
+    
     position: relative;
     display: flex;
     flex-direction: column;
+    /* Night mode background + default text */
+    background-color: #0f1a0f; /* deep forest */
+    color: #e6ffe6;           /* soft mint text */
 }
 
 main {
     flex: 1;
+    /* Inherit the night background */
+    background-color: #0f1a0f;
+    color: inherit;
 }
 
 .sidebar {
-    /* Changed to forest green */
-    background-image: linear-gradient(180deg, #0b3d0b 0%, #1f6f1f 50%, #2e8b57 100%);
+    /* Forest green gradient (darkened) */
+    background-image: linear-gradient(180deg, #0b3d0b 0%, #165c16 50%, #1f6f1f 100%);
 }
 
+/* Top bar goes dark */
 .top-row {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
+    background-color: #0f1a0f;
+    border-bottom: 1px solid #1e3320;
     justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+/* Links in top row: mint + underline on hover */
+.top-row ::deep a,
+.top-row ::deep .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #9ff5b9;
+}
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+.top-row ::deep a:hover,
+.top-row ::deep .btn-link:hover {
+    text-decoration: underline;
+}
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+/* Keep first link behavior */
+.top-row ::deep a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+/* Content area: dark backgrounds and readable text */
+article.content {
+    background-color: #0f1a0f;
+    color: #e6ffe6;
+}
+
+/* General content overrides */
+article.content ::deep a {
+    color: #7cff9e;
+}
+
+article.content ::deep a:hover {
+    color: #a8ffbe;
+    text-decoration: underline;
+}
+
+/* Buttons: forest green accent */
+article.content ::deep .btn,
+article.content ::deep button {
+    background-color: #1f6f1f;
+    border-color: #2e8b57;
+    color: #e6ffe6;
+}
+
+article.content ::deep .btn:hover,
+article.content ::deep button:hover {
+    background-color: #277e27;
+    border-color: #3aa06a;
+    color: #ffffff;
+}
+
+/* Inputs: dark UI */
+article.content ::deep input,
+article.content ::deep select,
+article.content ::deep textarea {
+    background-color: #122212;
+    border: 1px solid #2a4a2a;
+    color: #e6ffe6;
+}
+
+article.content ::deep input::placeholder {
+    color: #8fcda3;
+}
+
+/* Tables: dark with subtle borders */
+article.content ::deep .table {
+    --bs-table-bg: #0f1a0f;
+    --bs-table-color: #e6ffe6;
+    background-color: #0f1a0f;
+    color: #e6ffe6;
+}
+
+article.content ::deep .table-bordered > :not(caption) > * {
+    border-color: #1e3320;
+}
+
+article.content ::deep .table > :not(caption) > * > * {
+    border-color: #1e3320;
+}
+
+/* Sidebar links: readable in dark */
+.sidebar ::deep .nav-link {
+    color: #c8ffdb;
+}
+
+.sidebar ::deep .nav-link:hover {
+    color: #ffffff;
+}
+
+/* Active nav item with a soft highlight */
+.sidebar ::deep .nav-link.active {
+    background-color: rgba(46, 139, 87, 0.25); /* sea-green tint */
+    border-radius: .25rem;
+    color: #ffffff;
+}
+
+/* Strike animation remains visible on dark bg */
+article.content ::deep .strike-ball {
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Responsive adjustments remain the same */
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
     }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
+    .top-row ::deep a,
+    .top-row ::deep .btn-link {
         margin-left: 0;
     }
 }
@@ -71,7 +205,8 @@ main {
         width: 0;
     }
 
-    .top-row, article {
+    .top-row,
+    article {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
