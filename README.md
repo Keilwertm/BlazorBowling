@@ -8,7 +8,7 @@ To run this
 - Click on the link for the localhost provided 
 
 dotnet run -c Debug 
-- Debug mode runs DebugChecker.cs to check for validation.
+- Debug mode runs DebugChecker.cs to check for validation
 
 dotnet run -c Release 
 - Runs in release mode, showing a 'customer-facing' product
