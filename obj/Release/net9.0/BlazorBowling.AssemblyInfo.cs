@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlazorBowling")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba85f4a7526c42210547a55bd6fdf0b6e5b6ae9d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e209baef0252078742cdfd9a4ca74100c86d02d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlazorBowling")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlazorBowling")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

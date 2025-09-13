@@ -3,7 +3,6 @@ using System.Linq;
 
 public static class BowlingScorer
 {
-    // Standard bowling scoring from a list of pinfalls.
     // Accepts typical 20–21 rolls (or 12 strikes); ignores extra beyond 10 frames.
     public static int ScoreFromRolls(IEnumerable<int> rollsEnumerable)
     {

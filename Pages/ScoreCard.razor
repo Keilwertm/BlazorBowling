@@ -71,10 +71,10 @@ else
         @for (int i = 0; i < maxFrames; i++)
         {
             var displayTotal = GetDisplayedFrameTotal(i);
+            bool frameComplete = i < currentFrame; 
+            var text = displayTotal.HasValue ? displayTotal.Value.ToString() : (frameComplete ? "0" : "-");
             var highlight = displayTotal.HasValue && displayTotal.Value == 10;
-            <td class="frame-total @(highlight ? "highlight" : null)">
-                @(displayTotal.HasValue ? displayTotal.Value.ToString() : "-")
-            </td>
+            <td class="frame-total @(highlight ? "highlight" : null)">@text</td>
         }
     </tr>
     </tbody>
@@ -125,7 +125,7 @@ else
         if (currentRoll == 1)
             pinsLeft -= firstRoll;
 
-        // use manual/auto pins if provided, otherwise random
+        // use manual/auto pins if provided
         lastRoll = forcedPins.HasValue
             ? Math.Clamp(forcedPins.Value, 0, pinsLeft)
             : rnd.Next(0, pinsLeft + 1);
@@ -137,7 +137,6 @@ else
         {
             rolls[1, currentFrame] = null; 
             frameTotals[currentFrame] = 10;
-
 
             if (currentFrame == 9 && maxFrames == 10)
                 maxFrames = 11;
@@ -170,8 +169,6 @@ else
         // recompute full scoring with bonuses after each delivery
         RecalculateScore();
     }
-
-    // ... existing code ...
 
     private int? GetDisplayedFrameTotal(int i)
     {

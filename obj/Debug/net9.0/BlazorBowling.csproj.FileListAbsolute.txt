@@ -3238,10 +3238,10 @@ C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\BlazorBowling.pdb
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\ref\BlazorBowling.dll
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\s2bofwv2gr-hbzb0xmhp2.gz
 C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\co4pn60q1s-hbzb0xmhp2.gz
-C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.r4pwulml9d.wasm
-C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.4qcctj9lu3.pdb
-C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.r4pwulml9d.wasm.gz
-C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.4qcctj9lu3.pdb.gz
-C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-r4pwulml9d.gz
-C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-4qcctj9lu3.gz
-C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-p86s7s42v9.gz
+C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.1iyvr145et.wasm
+C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.p83fse0apt.pdb
+C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.1iyvr145et.wasm.gz
+C:\Users\keilw\RiderProjects\BlazorBowling\bin\Debug\net9.0\wwwroot\_framework\BlazorBowling.p83fse0apt.pdb.gz
+C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\6eckv1bnlu-1iyvr145et.gz
+C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\u1mafpx2rb-p83fse0apt.gz
+C:\Users\keilw\RiderProjects\BlazorBowling\obj\Debug\net9.0\compressed\twn8wfm7ix-1h2eoc8eaa.gz
