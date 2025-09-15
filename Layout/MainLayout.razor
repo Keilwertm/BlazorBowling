@@ -11,10 +11,17 @@
             <a href="https://github.com/Keilwertm/BlazorBowling" target="_blank">GitHub</a>
         </div>
 
-        @if (DebugStatus?.ChecksPassed == true)
+        @if (!string.IsNullOrWhiteSpace(DebugStatus?.Message))
         {
-            <div class="debug-banner">
-                ✅ @DebugStatus.Message
+            <div class="debug-banner @(DebugStatus.ChecksPassed ? "debug-success" : "debug-error")">
+                @if (DebugStatus.ChecksPassed)
+                {
+                    <span>✅ @DebugStatus.Message</span>
+                }
+                else
+                {
+                    <span>❌ @DebugStatus.Message</span>
+                }
             </div>
         }
 

@@ -5,23 +5,6 @@
         color: #e6ffe6;
     }
 
-    /* Red bowling ball animation */
-    article.content[b-rygzlbmjrg]  .strike-ball {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        /* Use explicit color stops for broad compatibility */
-        background:
-                radial-gradient(circle at 35% 35%, #ff8a8a 0px, #ff8a8a 6px, transparent 7px),
-                radial-gradient(circle at 60% 25%, #ff8a8a 0px, #ff8a8a 4px, transparent 5px),
-                radial-gradient(circle at 45% 55%, #ff8a8a 0px, #ff8a8a 3px, transparent 4px),
-                radial-gradient(circle at 50% 50%, #ff2b2b 0%, #cc2020 70%, #aa1717 100%);
-        box-shadow: 0 4px 10px rgba(0,0,0,.5);
-        margin: 10px 0 0 10px;
-        animation: strike-roll-b-rygzlbmjrg 2.2s ease-out forwards;
-        will-change: transform, opacity;
-    }
-
     @keyframes strike-roll-b-rygzlbmjrg {
         0% {
             transform: translateX(0) rotate(0deg);

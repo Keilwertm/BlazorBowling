@@ -19,15 +19,15 @@ var host = builder.Build();
 var debugStatus = host.Services.GetRequiredService<DebugStatus>();
 try
 {
-    DebugChecker.Run();
-    debugStatus.ChecksPassed = true;
-    debugStatus.Message = "All self-checks passed.";
+    var checker = new DebugChecker();
+    var result = await checker.RunAsync(BowlingScorer.ScoreFromRolls);
+    debugStatus.ChecksPassed = result.Passed;
+    debugStatus.Message = result.Message;
 }
 catch (Exception ex)
 {
     debugStatus.ChecksPassed = false;
     debugStatus.Message = $"Self-checks failed: {ex.Message}";
-    throw;
 }
 await host.RunAsync();
 #else
