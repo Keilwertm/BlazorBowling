@@ -13,41 +13,41 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = BlazorBowling
 build_property.RootNamespace = BlazorBowling
-build_property.ProjectDir = C:\Users\keilw\RiderProjects\BlazorBowling\
+build_property.ProjectDir = C:\Users\mkeilwert\RiderProjects\BlazorBowling\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\keilw\RiderProjects\BlazorBowling
+build_property.MSBuildProjectDirectory = C:\Users\mkeilwert\RiderProjects\BlazorBowling
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/App.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/Pages/Home.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/Pages/PreviousGames.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/Pages/PreviousGames.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJldmlvdXNHYW1lcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/Pages/ScoreCard.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/Pages/ScoreCard.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2NvcmVDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/_Imports.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/Layout/MainLayout.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-rygzlbmjrg
 
-[C:/Users/keilw/RiderProjects/BlazorBowling/Layout/NavMenu.razor]
+[C:/Users/mkeilwert/RiderProjects/BlazorBowling/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-2c036si9w4
