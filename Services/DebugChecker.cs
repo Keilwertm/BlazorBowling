@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace BlazorBowling;
 
 public class DebugCheckResult
@@ -58,8 +51,7 @@ public class DebugChecker
         }
 
         if (failures.Count == 0)
-        {
-            return new DebugCheckResult
+        { return new DebugCheckResult
             {
                 Passed = true,
                 Message = "All debug checks passed"

@@ -1,5 +1,3 @@
-using System;
-
 namespace BlazorBowling;
 
 public class DebugStatus

@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-
 public static class BowlingScorer
 {
-    // Accepts typical 20–21 rolls (or 12 strikes); ignores extra beyond 10 frames.
+    // Scorer runs through the logic using DebugChecker.cs to validate functionality 
     public static int ScoreFromRolls(IEnumerable<int> rollsEnumerable)
     {
         var rolls = rollsEnumerable.ToList();
@@ -16,7 +13,7 @@ public static class BowlingScorer
 
             // Strike
             if (rolls[rollIndex] == 10)
-            {
+            { 
                 score += 10 + Get(rolls, rollIndex + 1) + Get(rolls, rollIndex + 2);
                 rollIndex += 1;
                 continue;
@@ -28,13 +25,9 @@ public static class BowlingScorer
             int framePins = first + second;
 
             if (framePins == 10) // Spare
-            {
-                score += 10 + Get(rolls, rollIndex + 2);
-            }
+            { score += 10 + Get(rolls, rollIndex + 2); }
             else
-            {
-                score += framePins;
-            }
+            { score += framePins; }
 
             rollIndex += 2;
         }
