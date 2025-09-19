@@ -53,11 +53,11 @@ else
         {
             var r1 = rolls[0,i];
             var r2 = rolls[1,i];
-            // spare display: show "/" when first + second roll equals 10 (and not a strike on first ball)
+            // spare display: show "/" when first + second-roll equals 10 (and not a strike on first-ball)
             string cell = "-";
             if (r1 == 10)
             {
-                cell = ""; // strike in this frame; second box is empty for frames 1-9
+                cell = ""; // strike in this frame; then the second row is empty for frames 1-9
             }
             else if (r2.HasValue)
             {
