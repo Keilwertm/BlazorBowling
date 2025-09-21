@@ -1,5 +1,4 @@
 ﻿@inherits LayoutComponentBase
-@using BlazorBowling
 @inject DebugStatus DebugStatus
 <div class="page">
     <div class="sidebar">
@@ -15,16 +14,11 @@
         {
             <div class="debug-banner @(DebugStatus.ChecksPassed ? "debug-success" : "debug-error")">
                 @if (DebugStatus.ChecksPassed)
-                {
-                    <span>✅ @DebugStatus.Message</span>
-                }
+                { <span>✅ @DebugStatus.Message</span>}
                 else
-                {
-                    <span>❌ @DebugStatus.Message</span>
-                }
+                { <span>❌ @DebugStatus.Message</span> }
             </div>
         }
-
         <article class="content px-4">
             @Body
         </article>
